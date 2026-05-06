@@ -2,6 +2,12 @@
 
 A full-stack Task Manager application with **role-based access control** built with React Native (mobile), Node.js + Express (backend), and MongoDB Atlas (database).
 
+## Live Deployment
+
+- **Frontend**: https://trizen-taskmanager.vercel.app
+- **Backend API**: https://trizen-taskmanager-backend.vercel.app
+- **Backend Health Check**: https://trizen-taskmanager-backend.vercel.app/api/health
+
 ## 🎯 Project Overview
 
 TaskFlow is a production-ready task management system with:
@@ -85,6 +91,12 @@ Or **sign up** with new credentials to create a new user account.
 ## 📚 API Documentation
 
 ### Base URL
+```
+https://trizen-taskmanager-backend.vercel.app/api
+```
+
+For local development, use:
+
 ```
 http://localhost:3000/api
 ```
@@ -246,7 +258,7 @@ GET /tasks/admin/users
 
 1. **Login** and get token:
    ```
-   POST http://localhost:3000/api/auth/login
+   POST https://trizen-taskmanager-backend.vercel.app/api/auth/login
    Body: { "email": "admin@taskflow.com", "password": "password" }
    ```
 
@@ -259,9 +271,9 @@ GET /tasks/admin/users
 
 4. **Test endpoints** (examples):
    ```
-   GET http://localhost:3000/api/tasks
-   POST http://localhost:3000/api/tasks
-   PATCH http://localhost:3000/api/tasks/:id/status
+   GET https://trizen-taskmanager-backend.vercel.app/api/tasks
+   POST https://trizen-taskmanager-backend.vercel.app/api/tasks
+   PATCH https://trizen-taskmanager-backend.vercel.app/api/tasks/:id/status
    ```
 
 ## 🔧 Environment Configuration
@@ -279,10 +291,10 @@ NODE_ENV=development
 **⚠️ Important:** Keep `.env` file secret and never commit it to version control.
 
 ### Mobile App Configuration
-File: `TaskFlow/services/apiClient.ts`
+File: `mobile/.env`
 
 The mobile app automatically connects to:
-- Backend URL: `http://localhost:3000/api`
+- Backend URL: `https://trizen-taskmanager-backend.vercel.app/api`
 - Mode: Real backend (set to `USE_MOCK_BACKEND = false`)
 
 ## 📱 Mobile App Features
@@ -321,7 +333,8 @@ npm start
 ```
 
 **API Connection Issues**
-- Ensure backend server is running on `http://localhost:3000`
+- For live deployment, ensure `https://trizen-taskmanager-backend.vercel.app/api/health` returns success
+- For local development, ensure backend server is running on `http://localhost:3000`
 - Check firewall settings
 - On physical device, use your machine's IP instead of `localhost`
 
@@ -361,18 +374,24 @@ npm start
 
 ## 🚀 Deployment
 
-### Backend Deployment (Heroku/Railway/Render)
+### Live Links
+
+- **Frontend**: https://trizen-taskmanager.vercel.app
+- **Backend API**: https://trizen-taskmanager-backend.vercel.app
+- **Health Check**: https://trizen-taskmanager-backend.vercel.app/api/health
+
+### Backend Deployment (Vercel)
 
 1. Push code to GitHub
-2. Connect to deployment platform
-3. Set environment variables
-4. Deploy
+2. Deploy the `backend` folder to Vercel
+3. Set environment variables: `MONGODB_URI`, `JWT_SECRET`, `NODE_ENV=production`
+4. Ensure MongoDB Atlas Network Access allows the deployment host
 
 ### Mobile App Deployment
 
 - **iOS**: Use Expo CLI or Apple TestFlight
 - **Android**: Use Expo CLI or Google Play Console
-- **Web**: Deploy built bundle to Netlify/Vercel
+- **Web**: Deploy the `mobile` folder to Vercel with `EXPO_PUBLIC_API_URL=https://trizen-taskmanager-backend.vercel.app/api`
 
 ## 📝 MongoDB Connection
 
