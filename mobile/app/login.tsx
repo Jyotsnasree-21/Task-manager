@@ -18,10 +18,13 @@ import { Colors, Typography, Spacing, Radius, Shadow } from '../constants/theme'
 export default function LoginScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, signup } = useAuth();
 
+  const [isSignup, setIsSignup] = useState(false);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -29,26 +32,45 @@ export default function LoginScreen() {
 
   function validate(): boolean {
     let valid = true;
+    if (isSignup && !name.trim()) { setNameError('Name is required'); valid = false; } else { setNameError(''); }
     if (!email.trim()) { setEmailError('Email is required'); valid = false; } else { setEmailError(''); }
-    if (!password) { setPasswordError('Password is required'); valid = false; } else { setPasswordError(''); }
+    if (!password) {
+      setPasswordError('Password is required');
+      valid = false;
+    } else if (isSignup && password.length < 6) {
+      setPasswordError('Password must be at least 6 characters');
+      valid = false;
+    } else {
+      setPasswordError('');
+    }
     return valid;
   }
 
-  async function handleLogin() {
+  async function handleSubmit() {
     if (!validate()) return;
     setGlobalError('');
     setLoading(true);
     try {
-      await login(email.trim(), password);
+      if (isSignup) {
+        await signup(name.trim(), email.trim(), password);
+      } else {
+        await login(email.trim(), password);
+      }
       router.replace('/(tabs)');
     } catch (e: any) {
-      setGlobalError(e.message || 'Login failed. Please try again.');
+      setGlobalError(e.message || `${isSignup ? 'Signup' : 'Login'} failed. Please try again.`);
     } finally {
       setLoading(false);
     }
   }
 
-
+  function toggleMode() {
+    setIsSignup(current => !current);
+    setGlobalError('');
+    setNameError('');
+    setEmailError('');
+    setPasswordError('');
+  }
 
   return (
     <KeyboardAvoidingView
@@ -80,8 +102,10 @@ export default function LoginScreen() {
 
         {/* Form Card */}
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>Welcome back</Text>
-          <Text style={styles.cardSubtitle}>Sign in to your account</Text>
+          <Text style={styles.cardTitle}>{isSignup ? 'Create account' : 'Welcome back'}</Text>
+          <Text style={styles.cardSubtitle}>
+            {isSignup ? 'Sign up to start managing tasks' : 'Sign in to your account'}
+          </Text>
 
           {globalError ? (
             <View style={styles.errorBanner}>
@@ -90,6 +114,17 @@ export default function LoginScreen() {
           ) : null}
 
           <View style={styles.form}>
+            {isSignup ? (
+              <Input
+                label="Full name"
+                placeholder="Enter your name"
+                value={name}
+                onChangeText={setName}
+                autoCapitalize="words"
+                leftIcon="person"
+                error={nameError}
+              />
+            ) : null}
             <Input
               label="Email address"
               placeholder="Enter your email"
@@ -109,7 +144,21 @@ export default function LoginScreen() {
               leftIcon="lock"
               error={passwordError}
             />
-            <Button label="Sign In" onPress={handleLogin} loading={loading} fullWidth size="lg" />
+            <Button
+              label={isSignup ? 'Sign Up' : 'Sign In'}
+              onPress={handleSubmit}
+              loading={loading}
+              fullWidth
+              size="lg"
+            />
+            <View style={styles.switchRow}>
+              <Text style={styles.switchText}>
+                {isSignup ? 'Already have an account?' : "Don't have an account?"}
+              </Text>
+              <Pressable onPress={toggleMode} disabled={loading} hitSlop={8}>
+                <Text style={styles.switchAction}>{isSignup ? 'Sign in' : 'Sign up'}</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -168,4 +217,13 @@ const styles = StyleSheet.create({
   errorBannerText: { ...Typography.bodySmall, color: Colors.error },
 
   form: { gap: Spacing.base },
+  switchRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    gap: Spacing.xs,
+  },
+  switchText: { ...Typography.bodySmall, color: Colors.textSecondary },
+  switchAction: { ...Typography.bodySmall, color: Colors.primary, fontWeight: '700' },
 });

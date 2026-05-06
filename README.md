@@ -1,4 +1,4 @@
-# TaskFlow - Complete Task Manager Application
+# Taskmanager - Complete Task Manager Application
 
 A full-stack Task Manager application with **role-based access control** built with React Native (mobile), Node.js + Express (backend), and MongoDB Atlas (database).
 
@@ -10,7 +10,7 @@ A full-stack Task Manager application with **role-based access control** built w
 
 ## 🎯 Project Overview
 
-TaskFlow is a production-ready task management system with:
+Taskmanager is a production-ready task management system with:
 - ✅ **Mobile App**: React Native (Expo) with clean UI
 - ✅ **Backend API**: Node.js + Express with JWT authentication
 - ✅ **Database**: MongoDB Atlas with role-based access
@@ -20,7 +20,7 @@ TaskFlow is a production-ready task management system with:
 ## 📁 Project Structure
 
 ```
-TaskFlow/
+Taskmanager/
 ├── mobile/              # React Native Expo app (will be added)
 ├── backend/             # Node.js + Express server
 │   ├── src/
@@ -62,10 +62,10 @@ npm run dev              # Start development server (localhost:3000)
 
 ### 2. Configure & Start Mobile App
 
-The mobile app (React Native) is currently in the `TaskFlow/` directory.
+The mobile app (React Native) is currently in the `Taskmanager/` directory.
 
 ```bash
-cd TaskFlow
+cd Taskmanager
 npm install --legacy-peer-deps  # Install with peer deps flag
 npm start                        # Start Expo development server
 ```
@@ -83,8 +83,8 @@ You can immediately test the app with these credentials:
 
 | Email | Password | Role |
 |-------|----------|------|
-| `admin@taskflow.com` | `password` | Admin |
-| `user@taskflow.com` | `password` | User |
+| `admin@Taskmanager.com` | `password` | Admin |
+| `user@Taskmanager.com` | `password` | User |
 
 Or **sign up** with new credentials to create a new user account.
 
@@ -109,7 +109,7 @@ POST /auth/login
 Content-Type: application/json
 
 {
-  "email": "admin@taskflow.com",
+  "email": "admin@Taskmanager.com",
   "password": "password"
 }
 ```
@@ -122,7 +122,7 @@ Content-Type: application/json
   "user": {
     "id": "64f1a1b1c1d1e1f1g1h1i1j1",
     "name": "Admin User",
-    "email": "admin@taskflow.com",
+    "email": "admin@Taskmanager.com",
     "role": "Admin"
   }
 }
@@ -259,7 +259,7 @@ GET /tasks/admin/users
 1. **Login** and get token:
    ```
    POST https://trizen-taskmanager-backend.vercel.app/api/auth/login
-   Body: { "email": "admin@taskflow.com", "password": "password" }
+   Body: { "email": "admin@Taskmanager.com", "password": "password" }
    ```
 
 2. **Copy the token** from response
@@ -284,7 +284,7 @@ File: `backend/.env`
 ```
 MONGODB_URI=mongodb+srv://jyotsnasree21:jyotsna21@cluster0.nl4hxon.mongodb.net/?appname=cluster0
 PORT=3000
-JWT_SECRET=taskflow_secret_key_2024_secure
+JWT_SECRET=Taskmanager_secret_key_2024_secure
 NODE_ENV=development
 ```
 

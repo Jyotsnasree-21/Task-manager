@@ -7,6 +7,10 @@ export interface LoginPayload {
   password: string;
 }
 
+export interface SignupPayload extends LoginPayload {
+  name: string;
+}
+
 export interface AuthResult {
   user: Omit<User, 'password'>;
   token: string;
@@ -78,6 +82,52 @@ export const authService = {
 
     const { password: _omit, ...safeUser } = user;
     const token = generateMockToken(user._id, user.role);
+
+    apiClient.setToken(token);
+    await storageService.saveAuthToken(token);
+    await storageService.saveCurrentUser(safeUser);
+
+    return { user: safeUser, token };
+  },
+
+  async signup(payload: SignupPayload): Promise<AuthResult> {
+    if (!USE_MOCK_BACKEND) {
+      const response = await fetch(`${apiClient.baseUrl}/auth/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const res = await response.json();
+      if (!response.ok) throw new Error(res.message || 'Signup failed');
+
+      const token = res.token;
+      const user = normalizeUser(res.user);
+
+      apiClient.setToken(token);
+      await storageService.saveAuthToken(token);
+      await storageService.saveCurrentUser(user);
+
+      return { user, token };
+    }
+
+    await new Promise(r => setTimeout(r, 800));
+    const users = await initMockUsers();
+    const exists = users.some(user => user.email.toLowerCase() === payload.email.toLowerCase());
+    if (exists) throw new Error('Email already exists');
+
+    const newUser: User = {
+      _id: Date.now().toString(),
+      name: payload.name,
+      email: payload.email.toLowerCase(),
+      password: payload.password,
+      role: 'user',
+      avatar: buildAvatar(payload.name),
+      createdAt: new Date().toISOString(),
+    };
+    await storageService.saveUsers([...users, newUser]);
+
+    const { password: _omit, ...safeUser } = newUser;
+    const token = generateMockToken(newUser._id, newUser.role);
 
     apiClient.setToken(token);
     await storageService.saveAuthToken(token);
