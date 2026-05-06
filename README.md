@@ -1,5 +1,4 @@
 # TaskFlow - Complete Task Manager Application
-
 A full-stack Task Manager application with **role-based access control** built with React Native (mobile), Node.js + Express (backend), and MongoDB Atlas (database).
 
 ## Live Deployment
@@ -62,10 +61,10 @@ npm run dev              # Start development server (localhost:3000)
 
 ### 2. Configure & Start Mobile App
 
-The mobile app (React Native) is currently in the `TaskFlow/` directory.
+The mobile app (React Native) is currently in the `mobile/` directory.
 
 ```bash
-cd TaskFlow
+cd mobile
 npm install --legacy-peer-deps  # Install with peer deps flag
 npm start                        # Start Expo development server
 ```
@@ -83,8 +82,8 @@ You can immediately test the app with these credentials:
 
 | Email | Password | Role |
 |-------|----------|------|
-| `admin@taskflow.com` | `password` | Admin |
-| `user@taskflow.com` | `password` | User |
+| `admin@example.com` | `admin123` | Admin |
+| `user@example.com` | `user123` | User |
 
 Or **sign up** with new credentials to create a new user account.
 
@@ -109,8 +108,8 @@ POST /auth/login
 Content-Type: application/json
 
 {
-  "email": "admin@taskflow.com",
-  "password": "password"
+  "email": "admin@example.com",
+  "password": "admin123"
 }
 ```
 
@@ -122,7 +121,7 @@ Content-Type: application/json
   "user": {
     "id": "64f1a1b1c1d1e1f1g1h1i1j1",
     "name": "Admin User",
-    "email": "admin@taskflow.com",
+    "email": "admin@example.com",
     "role": "Admin"
   }
 }
@@ -259,7 +258,7 @@ GET /tasks/admin/users
 1. **Login** and get token:
    ```
    POST https://trizen-taskmanager-backend.vercel.app/api/auth/login
-   Body: { "email": "admin@taskflow.com", "password": "password" }
+   Body: { "email": "admin@example.com", "password": "admin123" }
    ```
 
 2. **Copy the token** from response
@@ -282,9 +281,9 @@ GET /tasks/admin/users
 File: `backend/.env`
 
 ```
-MONGODB_URI=mongodb+srv://jyotsnasree21:jyotsna21@cluster0.nl4hxon.mongodb.net/?appname=cluster0
+MONGODB_URI=mongodb+srv://db name:db password@cluster0.nl4hxon.mongodb.net/?appname=cluster0
 PORT=3000
-JWT_SECRET=taskflow_secret_key_2024_secure
+JWT_SECRET=your_jwt_secret_key_here
 NODE_ENV=development
 ```
 
@@ -397,7 +396,7 @@ npm start
 
 Your connection string is configured:
 ```
-mongodb+srv://jyotsnasree21:jyotsna21@cluster0.nl4hxon.mongodb.net/?appname=cluster0
+mongodb+srv://db name:db password@cluster0.nl4hxon.mongodb.net/?appname=cluster0
 ```
 
 This connects to **MongoDB Atlas** cluster with:
