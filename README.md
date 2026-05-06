@@ -1,4 +1,5 @@
 # TaskFlow - Complete Task Manager Application
+
 A full-stack Task Manager application with **role-based access control** built with React Native (mobile), Node.js + Express (backend), and MongoDB Atlas (database).
 
 ## Live Deployment
@@ -61,10 +62,10 @@ npm run dev              # Start development server (localhost:3000)
 
 ### 2. Configure & Start Mobile App
 
-The mobile app (React Native) is currently in the `mobile/` directory.
+The mobile app (React Native) is currently in the `TaskFlow/` directory.
 
 ```bash
-cd mobile
+cd TaskFlow
 npm install --legacy-peer-deps  # Install with peer deps flag
 npm start                        # Start Expo development server
 ```
@@ -82,8 +83,8 @@ You can immediately test the app with these credentials:
 
 | Email | Password | Role |
 |-------|----------|------|
-| `admin@example.com` | `admin123` | Admin |
-| `user@example.com` | `user123` | User |
+| `admin@taskflow.com` | `password` | Admin |
+| `user@taskflow.com` | `password` | User |
 
 Or **sign up** with new credentials to create a new user account.
 
@@ -108,8 +109,8 @@ POST /auth/login
 Content-Type: application/json
 
 {
-  "email": "admin@example.com",
-  "password": "admin123"
+  "email": "admin@taskflow.com",
+  "password": "password"
 }
 ```
 
@@ -121,7 +122,7 @@ Content-Type: application/json
   "user": {
     "id": "64f1a1b1c1d1e1f1g1h1i1j1",
     "name": "Admin User",
-    "email": "admin@example.com",
+    "email": "admin@taskflow.com",
     "role": "Admin"
   }
 }
@@ -258,7 +259,7 @@ GET /tasks/admin/users
 1. **Login** and get token:
    ```
    POST https://trizen-taskmanager-backend.vercel.app/api/auth/login
-   Body: { "email": "admin@example.com", "password": "admin123" }
+   Body: { "email": "admin@taskflow.com", "password": "password" }
    ```
 
 2. **Copy the token** from response
@@ -281,9 +282,9 @@ GET /tasks/admin/users
 File: `backend/.env`
 
 ```
-MONGODB_URI=mongodb+srv://db name:db password@cluster0.nl4hxon.mongodb.net/?appname=cluster0
+MONGODB_URI=mongodb+srv://jyotsnasree21:jyotsna21@cluster0.nl4hxon.mongodb.net/?appname=cluster0
 PORT=3000
-JWT_SECRET=your_jwt_secret_key_here
+JWT_SECRET=taskflow_secret_key_2024_secure
 NODE_ENV=development
 ```
 
@@ -346,30 +347,21 @@ npm start
 
 ## 📊 Features Implemented
 
-### Must-Have ✅
-- [x] User can log in
-- [x] User can view tasks assigned to them
-- [x] User can update task status
-- [x] Display tasks in clean list format
-- [x] Show loading and empty states
-- [x] Backend APIs (Login, Get tasks, Create task, Update status)
-- [x] Use MongoDB with Users and Tasks
-- [x] Role-based access (Admin/User)
-
-### Good-to-Have ✅
-- [x] Edit/Delete tasks (Admin)
-- [x] Filter tasks (role-based)
-- [x] Better UI (cards, badges, status indicators)
-- [x] Token-based authentication (JWT)
-- [x] Error handling
-- [x] Clean code structure
-
-### Bonus ✅
-- [x] Production-ready code
-- [x] Proper API error handling
-- [x] Security (password hashing, JWT)
-- [x] Modular architecture
-- [x] Comprehensive documentation
+- User can log in
+- User can view tasks assigned to them
+- User can update task status
+- Display tasks in clean list format
+- Show loading and empty states
+- Backend APIs (Login, Get tasks, Create task, Update status)
+- Use MongoDB with Users and Tasks
+- Role-based access (Admin/User)
+- Edit/Delete tasks (Admin)
+- Filter tasks (role-based)
+- Better UI (cards, badges, status indicators)
+- Token-based authentication (JWT)
+- Error handling
+- Clean code structure
+- Security (password hashing, JWT)
 
 ## 🚀 Deployment
 
@@ -396,7 +388,7 @@ npm start
 
 Your connection string is configured:
 ```
-mongodb+srv://db name:db password@cluster0.nl4hxon.mongodb.net/?appname=cluster0
+mongodb+srv://dbname:db password@cluster0.nl4hxon.mongodb.net/?appname=cluster0
 ```
 
 This connects to **MongoDB Atlas** cluster with:
@@ -404,28 +396,9 @@ This connects to **MongoDB Atlas** cluster with:
 - Collections: `users`, `tasks`
 - Auto-scaling on shared tier
 
-## 🎓 Learning Resources
-
-- **Expo Docs**: https://docs.expo.dev
-- **Express Docs**: https://expressjs.com
-- **MongoDB Docs**: https://docs.mongodb.com
-- **React Native**: https://reactnative.dev
-
-## 📧 Support
-
-For issues or questions:
-1. Check troubleshooting section
-2. Review API documentation
-3. Check backend logs: `npm run dev`
-4. Check console errors in mobile app
 
 ## 📄 License
 
 This project is provided as-is for educational purposes.
 
 ---
-
-**Status**: ✅ Ready to deploy
-**Backend**: Running on port 3000
-**Database**: Connected to MongoDB Atlas
-**Last Updated**: May 4, 2026
