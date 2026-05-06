@@ -20,18 +20,36 @@ Taskmanager is a production-ready task management system with:
 ## 📁 Project Structure
 
 ```
-Taskmanager/
-├── mobile/              # React Native Expo app (will be added)
-├── backend/             # Node.js + Express server
+taskflow/
+├── backend/                    # Node.js + Express API
 │   ├── src/
-│   │   ├── models/      # MongoDB schemas (User, Task)
-│   │   ├── controllers/ # Business logic
-│   │   ├── routes/      # API endpoints
-│   │   ├── middleware/  # Authentication & auth
-│   │   └── server.js    # Express entry point
-│   ├── .env             # Environment config (MongoDB credentials)
-│   └── package.json
-└── README.md            # This file
+│   │   ├── controllers/        # Auth and task business logic
+│   │   ├── middleware/         # JWT authentication middleware
+│   │   ├── models/             # MongoDB schemas (User, Task)
+│   │   ├── routes/             # API route definitions
+│   │   └── server.js           # Express app entry point
+│   ├── .env.example            # Backend environment template
+│   ├── package.json            # Backend scripts and dependencies
+│   └── vercel.json             # Backend deployment config
+├── mobile/                     # Expo React Native app
+│   ├── app/                    # Expo Router screens and layouts
+│   │   ├── (tabs)/             # Main tab screens
+│   │   ├── task/               # Task detail and create screens
+│   │   ├── _layout.tsx         # Root app layout/providers
+│   │   ├── index.tsx           # Auth redirect entry screen
+│   │   └── login.tsx           # Login/signup screen
+│   ├── assets/                 # Images and static assets
+│   ├── components/             # Shared feature and UI components
+│   ├── constants/              # Theme and mock data constants
+│   ├── contexts/               # Auth and task React contexts
+│   ├── hooks/                  # Shared hooks
+│   ├── scripts/                # Project utility scripts
+│   ├── services/               # API, auth, task, and storage services
+│   ├── .env.example            # Mobile environment template
+│   ├── app.json                # Expo app configuration
+│   ├── package.json            # Mobile scripts and dependencies
+│   └── vercel.json             # Frontend web deployment config
+└── README.md                   # Project documentation
 ```
 
 ## 🚀 Quick Start
