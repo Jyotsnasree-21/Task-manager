@@ -1,10 +1,9 @@
-# TaskFlow - Complete Task Manager Application
-
+# Task Manager 
 A full-stack Task Manager application with **role-based access control** built with React Native (mobile), Node.js + Express (backend), and MongoDB Atlas (database).
 
 ## 🎯 Project Overview
 
-TaskFlow is a production-ready task management system with:
+It is a production-ready task management system with:
 - ✅ **Mobile App**: React Native (Expo) with clean UI
 - ✅ **Backend API**: Node.js + Express with JWT authentication
 - ✅ **Database**: MongoDB Atlas with role-based access
@@ -14,7 +13,7 @@ TaskFlow is a production-ready task management system with:
 ## 📁 Project Structure
 
 ```
-TaskFlow/
+Task Manager/
 ├── mobile/              # React Native Expo app (will be added)
 ├── backend/             # Node.js + Express server
 │   ├── src/
@@ -56,10 +55,10 @@ npm run dev              # Start development server (localhost:3000)
 
 ### 2. Configure & Start Mobile App
 
-The mobile app (React Native) is currently in the `TaskFlow/` directory.
+The mobile app (React Native) is currently in the `Task Manager/` directory.
 
 ```bash
-cd TaskFlow
+cd Task Manager
 npm install --legacy-peer-deps  # Install with peer deps flag
 npm start                        # Start Expo development server
 ```
@@ -77,8 +76,8 @@ You can immediately test the app with these credentials:
 
 | Email | Password | Role |
 |-------|----------|------|
-| `admin@taskflow.com` | `password` | Admin |
-| `user@taskflow.com` | `password` | User |
+| `admin@Task Manager.com` | `password` | Admin |
+| `user@Task Manager.com` | `password` | User |
 
 Or **sign up** with new credentials to create a new user account.
 
@@ -97,7 +96,7 @@ POST /auth/login
 Content-Type: application/json
 
 {
-  "email": "admin@taskflow.com",
+  "email": "admin@Task Manager.com",
   "password": "password"
 }
 ```
@@ -110,7 +109,7 @@ Content-Type: application/json
   "user": {
     "id": "64f1a1b1c1d1e1f1g1h1i1j1",
     "name": "Admin User",
-    "email": "admin@taskflow.com",
+    "email": "admin@Task Manager.com",
     "role": "Admin"
   }
 }
@@ -247,7 +246,7 @@ GET /tasks/admin/users
 1. **Login** and get token:
    ```
    POST http://localhost:3000/api/auth/login
-   Body: { "email": "admin@taskflow.com", "password": "password" }
+   Body: { "email": "admin@Task Manager.com", "password": "password" }
    ```
 
 2. **Copy the token** from response
@@ -270,16 +269,16 @@ GET /tasks/admin/users
 File: `backend/.env`
 
 ```
-MONGODB_URI=mongodb+srv://jyotsnasree21:jyotsna21@cluster0.nl4hxon.mongodb.net/?appname=cluster0
+MONGODB_URI=mongodb+srv://db name:db password@cluster0.nl4hxon.mongodb.net/?appname=cluster0
 PORT=3000
-JWT_SECRET=taskflow_secret_key_2024_secure
+JWT_SECRET=Task Manager_secret_key_2024_secure
 NODE_ENV=development
 ```
 
 **⚠️ Important:** Keep `.env` file secret and never commit it to version control.
 
 ### Mobile App Configuration
-File: `TaskFlow/services/apiClient.ts`
+File: `Task Manager/services/apiClient.ts`
 
 The mobile app automatically connects to:
 - Backend URL: `http://localhost:3000/api`
@@ -378,7 +377,7 @@ npm start
 
 Your connection string is configured:
 ```
-mongodb+srv://jyotsnasree21:jyotsna21@cluster0.nl4hxon.mongodb.net/?appname=cluster0
+mongodb+srv://db name:db password@cluster0.nl4hxon.mongodb.net/?appname=cluster0
 ```
 
 This connects to **MongoDB Atlas** cluster with:
